@@ -99,3 +99,12 @@ def XOR(arr1, arr2):
             out.append(0)
         else: out.append(1)
     return out
+
+def AND(arr1, arr2):
+    out = []
+    for i in range(len(arr1)):
+        if(int(arr1[i])+int(arr2[i])==2 ):
+            out.append(1)
+        else: out.append(0)
+    return out
+   
