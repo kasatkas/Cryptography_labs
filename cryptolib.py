@@ -1,4 +1,5 @@
 from copy import copy
+from functools import reduce
 import numpy as np
 
 def help():
@@ -14,18 +15,31 @@ def help():
       + "\nЛогическое И: OR(arr1, arr2)"
       + "\nЛогическое ИЛИ: XOR(arr1, arr2)" )
 
-def egcd(a, b):
+""" def egcd(a, b):
     if a == 0:
         return (b, 0, 1)
     else:
         g, x, y = egcd(b % a, a)
         return (g, y - (b // a) * x, x)
 
-def rev_mod(b, n):
+def rev_mod(b, n): #обратное по модулю
     g, x, _ = egcd(b, n)
     #print('w = ', x)
     if g == 1:
-        return x % n
+        return x % n """
+
+def chineese_remainder_theorem(a: list[int], m: list[int]) -> int: #Китайская теорема об остатках
+    #a {list[int]} -- список значений а
+    #m {list[int]} -- список значений модулей
+    result = 0
+    M = reduce(lambda x, y: x * y, m)
+    for a_i, m_i in zip(a, m):
+        M_i = M // m_i
+        result += a_i * pow(M_i, -1, mod=m_i) * M_i
+    return result % M
+
+def rev_mod(b, n): #для python > 3.8
+    return int(pow(b, -1, mod=n))
 
 def toBin(x):
     x = int(x)
@@ -107,4 +121,3 @@ def AND(arr1, arr2):
             out.append(1)
         else: out.append(0)
     return out
-   
